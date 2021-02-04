@@ -18,6 +18,3 @@ jobs:
       - run: mkdocs gh-deploy --force
 env:
   GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-
-
-https://github.com/cachebi/cachebi.github.io.git
