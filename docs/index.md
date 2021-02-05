@@ -1,8 +1,15 @@
-# Welcome to MkDocs
+# Welcome to Cache.bi Documentation
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+For subscription service visit [cache.bi](https://cache.bi).
 
-## Commands
+## Introduction
+
+Cache.bi has been developed to assist end-users of POS systems review and analyse their sales, 
+customer and inventory data in an easy to use and highly customisable environment.
+
+An easy-to-use Dashboard presents data to the user anywhere they are. Being designed to be 
+accessible on any screen format, desktops, tablets and phones, no matter what you are using
+to access our portal, you can see live, historic or analytical data.
 
 * `mkdocs new [dir-name]` - Create a new project.
 * `mkdocs serve` - Start the live-reloading docs server.
