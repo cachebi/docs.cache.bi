@@ -4,8 +4,9 @@ nav:
     - About: about.md
 theme:
     name: material
-    extra_css:
-        - stylesheets/extra.css
+    theme:
+        palette:
+            primary: '#192E5B'
     custom_dir: overrides
     #custom_dir: mkdocs-material/material
 
