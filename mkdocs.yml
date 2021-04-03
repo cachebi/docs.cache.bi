@@ -1,4 +1,4 @@
-site_name: Documentation
+site_name: Cache.bi Documentation
 nav:
     - Home: index.md
     - About: about.md

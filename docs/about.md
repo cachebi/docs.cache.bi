@@ -42,3 +42,9 @@ Proprias saetiger, cratem conspexit fama frementis servitura mentis, at pando
 freta opportuna odore formamque **tecta viso**. Pedem sit cum marmoreis inquit
 malorum inustus: pleno haustos. **Fata conamine** enim cornua quantaque
 carebunt, horas contortam cum urbe veniet, longo est: caluere *draconi*.
+
+    mkdocs.yml    # The configuration file.
+    docs/
+        index.md  # The documentation homepage.
+        ...       # Other markdown pages, images and other files.
+
