@@ -5,7 +5,7 @@ nav:
 theme:
     name: material
     extra_css:
-        - docs/stylesheets/extra.css
+        - stylesheets/extra.css
     custom_dir: overrides
     #custom_dir: mkdocs-material/material
 
