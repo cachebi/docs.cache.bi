@@ -1,13 +1,19 @@
 site_name: Cache.bi Docs
+extra_css:
+    - stylesheets/extra.css
 nav:
     - Home: index.md
     - About: about.md
+    - Subscriptions: subscriptions.md
+    - Dashboards: dashboards.md
+    - Groups: groups.md
+    - Panels: panels.md
+    - Sales Panels: panels_sales.md
+    - Financial Panels: panels_financial.md
+
 theme:
     name: material
-    #extra_css:
-    #    - stylesheets/extra.css
     custom_dir: overrides
-    #custom_dir: mkdocs-material/material
 
     # 404 page
     static_templates:
