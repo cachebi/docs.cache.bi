@@ -14,8 +14,10 @@ nav:
     - Financial Panels: panels_financial.md
 
 theme:
-    name: material
+    name: 'material'
+    favicon: images/cache_white.svg
     custom_dir: overrides
+    logo: images/cache_white.svg
 
     # 404 page
     static_templates:
@@ -30,6 +32,4 @@ theme:
     font:
         text: Roboto
         code: Roboto Mono
-    favicon: assets/favicon.png
-    icon:
-        logo: logo
+
