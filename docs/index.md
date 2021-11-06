@@ -18,13 +18,14 @@ analytical data.
 
 No SQL knowledge or coding is required. All data filtering and selections are done through quick toggle switches 
 or dropdown selection.
-
-<img src="https://github.com/cachebi/docs.cache.bi/blob/gh-pages/assets/images/intro.gif" width="360" height="722" />
+<div style="text-align:center">
+<img src="https://github.com/cachebi/docs.cache.bi/blob/gh-pages/images/intro.gif?raw=true" width="360" height="722" alt="Example Dashboard">
+</div>
 
 ### Panel Types
 
-* `Sales Panels` - Show data relating to sales of products.
-* `Financial Panels` - Show data relating to financials.
+* `Sales Panels` - Data relating to sales of products and groups thereof.
+* `Financial Panels` - Data relating to financials.
 
 ## Project layout
 
