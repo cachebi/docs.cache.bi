@@ -19,7 +19,7 @@ analytical data.
 No SQL knowledge or coding is required. All data filtering and selections are done through quick toggle switches 
 or dropdown selection.
 
-<img src="https://github.com/cachebi/docs.cache.bi/blob/gh-pages/assets/images/intro.gif)" width="360" height="640" />
+<img src="https://github.com/cachebi/docs.cache.bi/blob/gh-pages/assets/images/intro.gif)" width="360" height="722" />
 
 ### Panel Types
 
