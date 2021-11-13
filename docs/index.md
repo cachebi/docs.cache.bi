@@ -1,4 +1,4 @@
-# Welcome to Cache.bi Documentation
+# Cache.bi Documentation
 
 To subscribe to our business intelligence service visit <a href="https://cache.bi" target="_blank">cache.bi</a>.  
 Log in to your business portal at <a href="https://portal.cache.bi" target="_blank">portal.cache.bi</a>.
@@ -11,13 +11,13 @@ and financial data (customer and inventory coming soon) in an easy to use and hi
 Ongoing development means additional functionality is being added consistently. This includes importing/creating
 set price promotions and coming soon Customer Payments with selection of date of payment.
 
-A choice of customisable Dashboards presents the desired data to the user without the need to be at the back of
+Customisable Dashboards presents the desired data to the user without the need to be at the back of
 office or trolling through emails of automated pdf reports. Designed to be accessible on any screen format, 
 desktops, tablets and phones, no matter what you are using to access your portal, you can see live, historic 
-analytical data.
+analytical data.Reports section for drilling down to individual item sales across any time-period.
 
 No SQL knowledge or coding is required. All data filtering and selections are done through quick toggle switches 
-or dropdown selection.
+or dropdown selection that match the settings in your POS system.
 <div style="text-align:center">
 <img src="https://github.com/cachebi/docs.cache.bi/blob/gh-pages/images/intro.gif?raw=true" width="360" height="722" alt="Example Dashboard">
 </div>
@@ -25,11 +25,6 @@ or dropdown selection.
 ### Panel Types
 
 * `Sales Panels` - Data relating to sales of products and groups thereof.
+  * `Group Transactions` - Product sales sorted into groupings as assigned in POS system
+  * `Transaction Glance` - Live updating sales panel of selected groupings
 * `Financial Panels` - Data relating to financials.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
