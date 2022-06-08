@@ -1,0 +1,679 @@
+openapi: 3.0.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/cachetech/cachewebapi/1.0.0
+    # - description: cachebi endpoint
+    # url: https://webapi.cache.bi/v1
+info:
+  description:
+    Cache Technologies api documentation for cache.bi
+    web ecommerce and pos communications. Visit
+    [cache.bi](https://cache.bi) or our full website
+    [cachetech.com.au](https://cachetech.com.au).
+  version: "1.0.0"
+  title: Cache Web API
+  termsOfService: 'https://cachetech.com.au/terms/'
+  contact:
+    email: roger@cpinet.com.au
+tags:
+  - name: customer
+    description: Basic Customer operations for web stores
+  - name: webstore
+    description: Basic operations for web stores
+    externalDocs:
+      description: Find out more
+      url: 'https://docs.cache.bi'
+  - name: voucher
+    description: Basic operations for gift vouchers for web stores
+security:
+  - ApiKeyAuth: []
+paths:
+  /customer:
+    post:
+      tags:
+        - customer
+      summary: Add a new Customer
+      description: Adds a new Customer to pos system with basic fields
+      operationId: addCustomer
+      responses:
+        '201':
+          description: Customer created
+        '400':
+          description: Bad input parameter
+        '409':
+          description: Customer already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerObject'
+        description: Customer Object to add
+        required: true
+  '/customer/{customerid}/{points}':
+    put:
+      tags:
+        - customer
+      summary: Update Customer points value
+      description: Update a Customer points in the pos system by the specified amount, may be negative (used points), must be a whole number
+      operationId: updatePoints
+      parameters:
+        - name: customerid
+          in: path
+          description: Customer Id to be updated - must use ID to ensure mapping to correct customer in pos system
+          required: true
+          schema:
+            type: string
+        - name: points
+          in: path
+          description: Points value (positive or negative) to adjust by
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '201':
+          description: Customer points updated
+        '400':
+          description: Bad input parameter
+        '409':
+          description: Customer ID not found
+  '/customer/{customerid}':
+    get:
+      tags:
+        - customer
+      summary: Searches for a Customer by API ID
+      description: Finds a single customer in pos system
+      operationId: findCustomerById
+      parameters:
+        - name: customerid
+          in: path
+          description: Search Customer by ID
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        '200':
+          description: Customer found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerObject'
+        '400':
+          description: Bad input parameter
+  '/customer/{lastName}':
+    get:
+      tags:
+        - customer
+      summary: Searches for Customers by last name
+      description: Find Customers in pos system, may return multiple results
+      operationId: findCustomerByName
+      parameters:
+        - name: lastName
+          in: path
+          description: Search string for Customer last name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Results matching last name
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerObject'
+        '400':
+          description: Bad input parameter
+  '/customer/{email}':
+    get:
+      tags:
+        - customer
+      summary: Searches for a Customer by email
+      description: Find Customers in pos system by email, may return multiple results
+      operationId: findCustomerByEmail
+      parameters:
+        - name: email
+          in: path
+          description: Search string for Customer email address
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Results matching Customer email address
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerObject'
+        '400':
+          description: Bad input parameter
+  '/customer/all':
+    get:
+      tags:
+        - customer
+      summary: Returns all Customers
+      description: Gets all Customers within pos system
+      operationId: findAllCustomers
+      responses:
+        '200':
+          description: Search results of all Customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerObject'
+        '400':
+          description: Bad input parameter
+  /voucher:
+    post:
+      tags:
+        - voucher
+      summary: Creates a new Gift Voucher
+      description: Adds a new Gift Voucher to the pos system with specified values
+      operationId: addVoucher
+      responses:
+        '201':
+          description: Voucher created
+        '400':
+          description: Bad input parameter
+        '409':
+          description: Voucher with specified code already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoucherObject'
+        description: Voucher Object to add
+        required: true
+  '/voucher/{code}':
+    put:
+      tags:
+        - voucher
+      summary: Updates a Gift Voucher
+      description: Update an existing Gift Voucher in the pos system
+      operationId: updateVoucher
+      parameters:
+        - name: code
+          in: path
+          description: Voucher code to be updated
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Voucher updated
+        '400':
+          description: Bad input parameter
+        '409':
+          description: Error updating existing voucher
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoucherObject'
+        description: Voucher Object to add with updated values
+        required: true
+    get:
+      tags:
+        - voucher
+      summary: Finds a Gift Voucher
+      description: Find a Gift Voucher in the pos system with specified code
+      operationId: findVoucher
+      parameters:
+        - name: code
+          in: path
+          description: Voucher code to be searched for
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Search results matching code
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VoucherObject'
+        '400':
+          description: Bad input parameter
+  /voucher/all:
+    get:
+      tags:
+        - voucher
+      summary: Returns all Gift Vouchers
+      description: Gets all Gift Vouchers in the pos system
+      operationId: allVouchers
+      responses:
+        '200':
+          description: Search results of all Vouchers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VoucherObject'
+        '400':
+          description: Bad input parameter
+  /weborder:
+    post:
+      tags:
+        - webstore
+      summary: Creates a Web Order in Idealpos
+      description: Web Order that either requires payment in store or has been fully paid online.
+      operationId: addWebOrder
+      responses:
+        '201':
+          description: Order successfully inserted
+        '400':
+          description: Failed to insert new order
+        '409':
+          description: Order already exists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebOrderObject'
+        description: Web Order Object to Add
+        required: true
+  /webproduct:
+    get:
+      tags:
+        - webstore
+      summary: Gets all Products
+      description: Returns all products in pos system that have been marked as WebStore products
+      operationId: getWebProducts
+      responses:
+        '200':
+          description: Results of all products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebProductObject'
+        '400':
+          description: Bad input parameter
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    CustomerObject:
+      type: object
+      required:
+        - code
+        - lastName
+      properties:
+        uniqueId:
+          type: integer
+          description: Created to handle pos system ability of using same email for multiple accounts, or changing of email/code. Cache.bi will create a unique identifier for each customer it defines as unique to enable the request of the id instead of email when such cases occur.
+        code:
+          type: string
+          minLength: 1
+          maxLength: 16
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 30
+        email:
+          type: string
+          maxLength: 50
+          example: 'test@example.com'
+        type:
+          type: integer
+          format: smallint
+          minimum: 1
+        firstName:
+          type: string
+          maxLength: 15
+        scanCode:
+          type: string
+          maxLength: 13
+        phone:
+          type: string
+          minLength: 1
+          maxLength: 20
+        company:
+          type: string
+          maxLength: 40
+        contactNo:
+          type: string
+          maxLength: 20
+        comments1:
+          type: string
+          maxLength: 50
+        comments2:
+          type: string
+          maxLength: 50
+        points:
+          type: integer
+          format: int32
+          default: 0
+        discontinue:
+          type: boolean
+          default: false
+        asAbove:
+          type: boolean
+          default: true
+        masterAccount:
+          type: string
+          maxLength: 16
+        creditLimit:
+          type: number
+          format: double
+          default: 0
+        address:
+          $ref: '#/components/schemas/Address'
+    Address:
+      properties:
+        type:
+          type: integer
+          format: tinyint
+          default: 1
+        address1:
+          type: string
+          maxLength: 35
+        address2:
+          type: string
+          maxLength: 35
+        suburb:
+          type: string
+          maxLength: 35
+        state:
+          type: string
+          maxLength: 3
+        postCode:
+          type: string
+          maxLength: 10
+      type: object
+    VoucherObject:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: string
+          maxLength: 16
+        site:
+          type: integer
+          default: 0
+          maximum: 99
+        date:
+          type: string
+          format: date-time
+          example: '2022-05-18 09:12:33.547'
+        dateExpires:
+          type: string
+          format: date-time
+          example: '2025-05-18 09:12:33.547'
+        amount:
+          type: number
+          format: decimal
+        amountRedeemed:
+          type: number
+          format: decimal
+        name:
+          type: string
+          maxLength: 30
+        allowGlobalRedemption:
+          type: boolean
+          default: true
+        giftVoucherType:
+          type: integer
+          minimum: 1
+          maximum: 99
+        emailAddress:
+          type: string
+          maxLength: 30
+    WebOrderObject:
+      type: object
+      required:
+        - orderCustomer
+        - orderAmount
+        - orderDetail
+        - paymentDetail
+        - priceMode
+      properties:
+        orderCustomer:
+          $ref: '#/components/schemas/OrderCustomer'
+        orderDeliveryAddress:
+          $ref: '#/components/schemas/OrderDeliveryAddress'
+        deliveryAmount:
+          type: number
+          format: decimal
+          default: 0
+        deliveryDate:
+          type: string
+          format: date-time
+          example: '2022-05-18 09:12:33.547' #UTC
+        triggerPromotions:
+          type: boolean
+          default: false
+        calculatePoints:
+          type: boolean
+          default: true
+        discountAmount:
+          type: number
+          format: decimal
+          default: 0
+        giftMessage:
+          type: string
+        giftOrder:
+          type: boolean
+          default: false
+        hostReference:
+          type: string
+        orderItems:
+          $ref: '#/components/schemas/OrderItems'
+        message:
+          type: string
+          default: ''
+        orderAmount:
+          type: number
+          format: decimal
+          example: 51.50
+        orderDetail:
+          type: string
+          format: enum [None, Pickup, EatIn, Delivery, ErrorReport]
+          default: Delivery
+        orderReference:
+          type: string
+        orderedDate:
+          type: string
+          format: date-time
+          example: '2022-05-18 09:12:33.547' #UTC
+        paymentDetail:
+          type: string
+          format: enum [None, Prepaid, PayOnDelivery, PayOnPickup, Redemption, Deposit]
+          default: Prepaid
+        priceMode:
+          type: string
+          format: enum [None, Inherit, ZeroPrice, PosPrice, WebPrice]
+          default: WebPrice
+        surchargeAmount:
+          type: number
+          format: decimal
+        pointsEarned:
+          type: integer
+    OrderCustomer:
+      required:
+        - code
+      properties:
+        uniqueId:
+          type: integer
+          description: Created to handle pos system ability of using same email for multiple accounts, or changing of email/code. Cache.bi will create a unique identifier for each customer it defines as unique to enable the request of the id instead of email when such cases occur.
+        code:
+          type: string
+        contactName:
+          type: string
+        contactNumber:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        reference:
+          type: string
+        pointsRedeemed:
+          type: integer
+    OrderDeliveryAddress:
+      properties:
+        citytown:
+          type: string
+        comment:
+          type: string
+        contactPhone:
+          type: string
+        country:
+          type: string
+        postalReference:
+          type: string
+        stateProvince:
+          type: string
+        street1:
+          type: string
+        street2:
+          type: string
+    OrderItems:
+      properties:
+        orderItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderStockItems'
+    OrderStockItems:
+      required:
+        - code
+        - description
+        - pricePaid
+        - pricingMode
+        - quantity
+        - type
+      properties:
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderChildStockItems'
+        code:
+          type: string
+        description:
+          type: string
+        discount:
+          type: number
+          format: decimal
+        pricePaid:
+          type: number
+          format: decimal
+        pricingMode:
+          type: string
+          format: enum [None, Inherit, ZeroPrice, PosPrice, WebPrice]
+          default: WebPrice
+        quantity:
+          type: number
+          format: decimal
+        type:
+          type: string
+          format: enum [None, Item, Instruction, Text]
+          default: Item
+    OrderChildStockItems:
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        discount:
+          type: number
+          format: decimal
+        pricePaid:
+          type: number
+          format: decimal
+        pricingMode:
+          type: string
+          format: enum [None, Inherit, ZeroPrice, PosPrice, WebPrice]
+          default: WebPrice
+        quantity:
+          type: number
+          format: decimal
+        type:
+          type: string
+          format: enum [None, Item, Instruction, Text]
+          default: Instruction
+    WebProductObject:
+      type: object
+      properties:
+        code:
+          type: string
+          maxLength: 16
+        shortDescription:
+          type: string
+          maxLength: 30
+        longDescription:
+          type: string
+          maxLength: 100
+        price1:
+          type: number
+          format: decimal
+        price2:
+          type: number
+          format: decimal
+        price3:
+          type: number
+          format: decimal
+        price4:
+          type: number
+          format: decimal
+        price5:
+          type: number
+          format: decimal
+        price6:
+          type: number
+          format: decimal
+        price7:
+          type: number
+          format: decimal
+        price8:
+          type: number
+          format: decimal
+        price9:
+          type: number
+          format: decimal
+        price10:
+          type: number
+          format: decimal
+        price11:
+          type: number
+          format: decimal
+        price12:
+          type: number
+          format: decimal
+        quantity:
+          $ref: '#/components/schemas/WebProductQuantityByLocation'
+        taxed:
+          type: boolean
+        isVariant:
+          type: boolean
+        variantMasterCode:
+          type: string
+        notes:
+          type: string
+    WebProductQuantityByLocation:
+      type: object
+      properties:
+        location:
+          type: integer
+          format: int32
+        quantity:
+          type: number
+          format: decimal
