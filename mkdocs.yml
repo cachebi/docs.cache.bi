@@ -1,6 +1,8 @@
 site_name: Cache.bi Docs
 extra_css:
     - stylesheets/extra.css
+    - stylesheets/neoteroi-mkdocs.css
+    - stylesheets/neoteroi-mkdocs.min.css
 extra_javascript:
     - javascripts/extra.js
 nav:
@@ -12,6 +14,8 @@ nav:
     - Panels: panels.md
     - Sales Panels: panels_sales.md
     - Financial Panels: panels_financial.md
+    - Promotions: promotions.md
+    - API Specification: api_spec.md
 
 theme:
     name: 'material'
@@ -33,3 +37,11 @@ theme:
         text: Roboto
         code: Roboto Mono
 
+markdown_extensions:
+    - pymdownx.details
+    - pymdownx.superfences
+    - pymdownx.tabbed:
+        alternate_style: true
+plugins:
+    - neoteroi.mkdocsoad:
+        use_pymdownx: true
