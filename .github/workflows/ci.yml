@@ -15,6 +15,7 @@ jobs:
           python-version: 3.x
       - run: pip install git+https://${GH_TOKEN}@github.com/squidfunk/mkdocs-material.git
       - run: pip install git+https://${GH_TOKEN}@github.com/Neoteroi/mkdocs-plugins.git
+      - run: pip install git+https://${GH_TOKEN}@github.com/blueswen/mkdocs-redoc-tag.git
       - run: mkdocs gh-deploy --force
 env:
   GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
