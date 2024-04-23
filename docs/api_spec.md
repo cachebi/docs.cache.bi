@@ -1,1 +1,8 @@
-[OAD(./docs/webapi.yaml)]
+---
+hide:
+  - navigation
+  - toc
+---
+#
+<redoc src="/webapi.json"/>
+

@@ -45,3 +45,5 @@ markdown_extensions:
 plugins:
     - neoteroi.mkdocsoad:
         use_pymdownx: true
+    - redoc-tag
+
